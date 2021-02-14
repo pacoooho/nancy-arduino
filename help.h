@@ -38,6 +38,9 @@ algunos comando solo valen para algunos modos ejemplos:
 "led modo 5 maxDelay 1000"- el modo 5 es discoteca, alternará colores y tiempos de 
                            encendidos mediante maxDelay( 500 - 1000) (sólo modo 5)
 "led modo 1 guarda"       - esto guardará la configuración existente del modo 1  en 
-                           la memoria persistente.
+                           la memoría persistente.
+"modo 1"                  - cambia al modo numero 1 
+"modo 1 ?"                - muestra la datos de la configuración.
+"modo 1 guarda"           - guarda el modo 1 en memoría persistente.
 --------------------------------------------------------------------------------            
 )=====";

@@ -106,14 +106,7 @@ char *leeSerial() {
        pch=strtok('\0'," ");int modoInt = atoi(pch);
        char *comando;comando=strtok('\0'," ");
        boolean ok =0;
-    //  Serial.print(" comando ");Serial.print(comando);Serial.println(); 
-
-        /*
-         *  pch=strtok('\0'," "); 
-         if (strcmp(pch, "?") == 0){
-          ok = 2;
-         }
-         */
+   
           pch=strtok('\0'," "); 
          int valor= atoi(pch);
          // Serial.print(" valor ");Serial.print(valor);Serial.println(); 
@@ -224,6 +217,7 @@ char *leeSerial() {
            pch=strtok('\0'," ");int modoInt = atoi(pch);
            pch=strtok('\0'," ");
            if ( strcmp(pch, "?")==0){
+             Serial.println(F("-------------------------------------"));
              if ( modoInt >=1 && modoInt<=4){
                Serial.println( modoDatosLed[modoInt].fijo == true ? "fijo" : "variable");
                Serial.print(F("intensidadMax "));Serial.println( modoDatosLed[modoInt].intensidadMax);
@@ -240,6 +234,8 @@ char *leeSerial() {
                Serial.print(F("intensidadMax "));Serial.println( modoDatosLed[modoInt].intensidadMax);
                Serial.print(F("intensidadMin "));Serial.println( modoDatosLed[modoInt].intensidadMin );
              }
+             Serial.println(F("-------------------------------------"));
+
              return;
            }
             else if ( strcmp(pch, "guarda")==0){
