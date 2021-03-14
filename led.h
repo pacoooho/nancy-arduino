@@ -28,8 +28,7 @@ struct modosDatos {
   byte intensidadMax;     // Editable por Serial (intensidadMin - 255) 155
   byte intensidadMin;      // Editable por Serial (0 - intensidadMax) 10
   byte pasos;
-  byte delayLed;
-   // Editable por Serial ( 2 - 100) 35
+  byte delayLed;// Editable por Serial ( 2 - 100) 35
 } modoDatosLed[6];
 
 // modo 4
@@ -72,9 +71,9 @@ void ActualizaEEPROM_Led(){
        modoDatosLed[f].fijo = false;
        modoDatosLed[f].intensidadMax = 155;
        modoDatosLed[f].intensidadMin = 10;
-       modoDatosLed[f].pasos = 5;
+       modoDatosLed[f].pasos = 1;
        modoDatosLed[f].delayLed = 35;
-     }
+      }
       
    EEPROM.put(eeAddressModo, modo);
    EEPROM.put(eeAddressModoDatosLed, modoDatosLed);
@@ -91,9 +90,10 @@ void ActualizaEEPROM_Led(){
    Serial.print(F("valAvul "));Serial.println(valAzul);
    Serial.print(F("maxDelay "));Serial.println(maxDelay);
    Serial.print(F("modoDatosLed[1].fijo "));Serial.println(modoDatosLed[1].fijo);
+   Serial.print(F("modoDatosLed[1].pasos "));Serial.println(modoDatosLed[1].pasos);
 
-   Serial.print("modoDatosLed[1].intensidadMax ");Serial.println(modoDatosLed[1].intensidadMax);
-   Serial.print("modoDatosLed[1].intensidadMin ");Serial.println(modoDatosLed[1].intensidadMin);
+   Serial.print(F("modoDatosLed[1].intensidadMax "));Serial.println(modoDatosLed[1].intensidadMax);
+   Serial.print(F("modoDatosLed[1].intensidadMin "));Serial.println(modoDatosLed[1].intensidadMin);
 
 }
 

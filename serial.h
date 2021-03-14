@@ -1,13 +1,14 @@
 
-char *leeSerial() {
- // Serial.println("S");
+char *leeSerial(byte s) {
+  Serial.println("S");
  // Serial.println(Serial.available() );
 
   
   char byteserial;  char lectura[50]; *lectura = '\0'; char *_lectura = lectura;
   byte r = 1; char f;
   while (r) {
-    while (Serial.available() > 0) {
+  if (s){
+      while (Serial.available() > 0) {
       *_lectura = Serial.read();
     //  Serial.print("L ");Serial.println(*_lectura);
       delayMicroseconds(50);  f =  *_lectura;
@@ -17,7 +18,19 @@ char *leeSerial() {
       }
       *_lectura++;
     }
-    if (f == '\n' || f == '\r' || f == '*') {
+  }else {
+      while (BT.available() > 0) {
+      *_lectura = BT.read();
+    //  Serial.print("L ");Serial.println(*_lectura);
+      delayMicroseconds(50);  f =  *_lectura;
+      if ( f == '*') {
+        r = 0;
+        break;
+      }
+      *_lectura++;
+    }
+  }
+    if ( f == '*') {
       r = 0;
       break;
     }
@@ -35,9 +48,12 @@ char *leeSerial() {
 
 //Serial.println(pch);
     ///////////////////////  AYUDA  //////////////////////////////////////////////////////////
+    
+  
   if (strcmp(pch, "ayuda") == 0) {
     pch = strtok('\0', " ");
     if (strcmp(pch, "led") == 0) {
+       analogWrite (motorPin, 0);
       Serial.println(F("Led"));
       char myChar;
       for (unsigned long  k = 0; k < strlen_P(ayudaLed); k++) {
@@ -48,6 +64,7 @@ char *leeSerial() {
     else if (strcmp(pch, "motor") == 0) {
       Serial.println(F("motor"));
       char myChar;
+       analogWrite (motorPin, 0);
       for (unsigned long  k = 0; k < strlen_P(ayudaMotor); k++) {
         myChar = pgm_read_byte_near(ayudaMotor + k);
         Serial.print(myChar);
@@ -61,24 +78,24 @@ char *leeSerial() {
       Serial.println(F("retardo"));
       pch=strtok('\0'," ");
       int delayM = atoi(pch);
-      if ( delayM <=9 || delayM >100){
+      if ( delayM <=3 || delayM >100){
         Serial.println(F("retardo no aceptable (10-100)"));  
          return;
        }
      retardoMotor=delayM;
-     Serial.print(F("retardo motor")); 
+     Serial.print(F("retardo motor ")); 
      Serial.println(retardoMotor);
    }
    else if (strcmp(pch, "voltaje") == 0) {
      Serial.println(F("voltaje"));
      pch=strtok('\0'," ");
      int voltaje = atoi(pch);
-     if ( voltaje <=99 || voltaje >200){
+     if ( voltaje <=50 || voltaje >255){
        Serial.println(F("voltaje no aceptable (100-200)"));  
        return;
      }
      voltajeMotor=voltaje;
-     Serial.print(F("voltaje  motor")); 
+     Serial.print(F("voltaje  motor ")); 
      Serial.println(voltaje);
    }
    else   if (strcmp(pch, "OnOff") == 0) {
@@ -220,8 +237,8 @@ char *leeSerial() {
              Serial.println(F("-------------------------------------"));
              if ( modoInt >=1 && modoInt<=4){
                Serial.println( modoDatosLed[modoInt].fijo == true ? "fijo" : "variable");
-               Serial.print(F("intensidadMax "));Serial.println( modoDatosLed[modoInt].intensidadMax);
-               if (modoInt!=4){Serial.print(F("intensidadMin "));Serial.println( modoDatosLed[modoInt].intensidadMin );}
+              if (modoInt!=4){ Serial.print(F("intensidadMax "));Serial.println( modoDatosLed[modoInt].intensidadMax);}
+               Serial.print(F("intensidadMin "));Serial.println( modoDatosLed[modoInt].intensidadMin );
                Serial.print(F("retardo "));Serial.println( modoDatosLed[modoInt].delayLed);           
              }
              if ( modoInt == 4 ){

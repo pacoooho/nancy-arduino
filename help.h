@@ -7,7 +7,7 @@ Para el motor son: "motor" - "retardo" - "velocidad " - "OnOff" - "guarda". ejem
 "motor retardo 10"      - esto cambiará el retardo entre pulso y pulso 
                         aumentando o disminuyendo la velocidad (10-100).
 "motor voltaje 100"     - esto cambiará el voltaje del pulso de salida al motor
-                         yo no lo tocaría (100-200).
+                         yo no lo tocaría (80-255).
 "motor OnOff encendido" - esto cambiará el estado del motor (apagado -encendido)
 "motor guarda"          - esto guardará la configuración existente en la memoria 
                          persistente  
@@ -18,7 +18,7 @@ const PROGMEM char ayudaLed[]  = R"=====(
 -------------------------------------------------------------------------------
 Hola hola puedes cambiar algunos párametros desde el terminal
 enviando algunos comandos. Hay 5 modos de iluminación. El modo 0 es apagado.
-Para el led son: "modo" - "fijo " - "variable " - "intensidadMax" - "intensidadMin" - 
+Para el led son: "modo" - "tipo " - "variable " - "intensidadMax" - "intensidadMin" - 
 "retardo " - "valRojo" -"valVerde " - "valAzul" - "maxDelay" - "guarda".
 algunos comando solo valen para algunos modos ejemplos:
 
@@ -38,9 +38,9 @@ algunos comando solo valen para algunos modos ejemplos:
 "led modo 5 maxDelay 1000"- el modo 5 es discoteca, alternará colores y tiempos de 
                            encendidos mediante maxDelay( 500 - 1000) (sólo modo 5)
 "led modo 1 guarda"       - esto guardará la configuración existente del modo 1  en 
-                           la memoría persistente.
+                           la memoria persistente.
 "modo 1"                  - cambia al modo numero 1 
 "modo 1 ?"                - muestra la datos de la configuración.
-"modo 1 guarda"           - guarda el modo 1 en memoría persistente.
+"modo 1 guarda"           - guarda el modo 1 en memoria persistente.
 --------------------------------------------------------------------------------            
 )=====";

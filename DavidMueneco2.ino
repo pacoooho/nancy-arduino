@@ -7,7 +7,7 @@ PWM LED Color Generation
 
 void(* resetFunc) (void) = 0;//declare reset function at address 0
 
-
+byte estadoBlue = 12;
 const int pinMicrophone = A1;
 long long int last_states = 0;
 unsigned long timer;
@@ -25,6 +25,7 @@ int val;
 
   #include "pulsador.h"
   #include "serial.h"
+  #include "blue.h"
 
  
 
@@ -40,27 +41,41 @@ void setup () {
   pinMode (motorPin, OUTPUT);
   
    pinMode(centroPin,INPUT);
+   pinMode(estadoBlue,INPUT);
+   
    Serial.println(F("Iniciando"));
     Serial.println(F("Para configuración por Serial : -ayuda led- ó -ayuda motor-"));
    
   Serial.println(sizeof(modosNombre)/sizeof(modosNombre[0]));
 Serial.println(sizeof(modoDatosLed[1]));
  
- /*
-  *    for (int i = 0 ; i < EEPROM.length() ; i++) {
+     for (int i = 0 ; i < EEPROM.length() ; i++) {
     EEPROM.write(i, 0);
   }
-  */
+   
  
  
   
 
   ActualizaEEPROM_Motor();
   ActualizaEEPROM_Led();
+
+
+ delay (100);
  
 }
 void loop ()
 {
+
+    if(BT.available())    // Si llega un dato por el puerto BT se envía al monitor serial
+  {
+    Serial.println("BT");
+   leeBlue();
+  }
+
+  if ( digitalRead(estadoBlue==HIGH)){
+   // Serial.println("conectado");
+  }
  /*
   *   if(BT.available())    // Si llega un dato por el puerto BT se envía al monitor serial
   {
@@ -127,7 +142,7 @@ if (milli>=timer){
    
   if (Serial.available()>0){
  // Serial.println(Serial.read());
-  leeSerial();
+  leeSerial(1);
 } 
   
 //  Serial.println( analogRead(centroPin)); 
